@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mounted里refs实现父类触发子类的方法.</title>
+</head>
+<body>
+<div id="app">
+    <loading ref="load"></loading>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 加载中...页在加载完成后会被销毁, 谁来触发他销毁? 一般是父类. 映射到vue就是父类触发子类的方法.
+
+    // 1.给要获取子组件添加ref标识
+    // 2.mounted阶段调用,如this.$refs.load.hide()
+    //
+    // 注: ref放在组件上获取的是vue实例(VueComponent), 而非dom元素, 但可以通过实例在全局调用子元素的方法.
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: 'hi'
+        },
+        mounted() {
+            console.log(this.$refs.load);
+            this.$refs.load.hide(); //获取到的是vm实例,但可以操控里面的方法.
+        },
+        components: {
+            loading: {
+                methods: {
+                    hide() {
+                        console.log('hide func被触发');
+                    }
+                },
+                template: "<h1>sucess!</h1>",
+            }
+        }
+    })
+</script>
+</body>
+</html>

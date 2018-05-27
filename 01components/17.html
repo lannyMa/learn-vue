@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件动态切换</title>
+</head>
+<body>
+<div id="app">
+    <h1>组件动态切换</h1>
+    home: <input type="radio" value="home" v-model="radio">
+    list: <input type="radio" value="list" v-model="radio"> <br>
+    <componet :is="radio"></componet>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            radio: 'home'
+        },
+        components: {
+            home: {
+                template: "<div>home</div>",
+            },
+            list: {
+                template: "<div>list</div>",
+            }
+        },
+    })
+</script>
+</body>
+</html>

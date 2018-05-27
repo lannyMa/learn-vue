@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props双向绑定-最简写法</title>
+</head>
+<body>
+<div id="app">
+    {{money}}
+    <awsome :childmoney.sync="money"></awsome>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money: 700,
+        },
+        components: {
+            awsome: {
+                props: ['childmoney'],
+                /*      methods:{
+                          getMoney(){
+                              this.$emit('update:childmoney',1400);
+                          }
+                      },*/
+                template: `<button @click="()=>this.$emit('update:childmoney',1400)">{{childmoney}}</button>`
+            }
+        }
+    })
+</script>
+</body>
+</html>

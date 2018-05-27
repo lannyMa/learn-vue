@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <h1>显示组件</h1>
+    <componet is="home"></componet>
+    <componet is="list"></componet>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //  - componet是vue内置命令,用于调用显示子组件
+    // is="home": 根据组件名html通过is=""获取.
+    //
+    // 如下我定义了两个组件,home,list,然后我在html里将2个组件显示出来
+    // componet事实上是创建了组件.
+
+    let vm = new Vue({
+        el: "#app",
+        components: {
+            home: {
+                template: "<div>home</div>",
+            },
+            list: {
+                template: "<div>list</div>",
+            }
+        },
+    })
+</script>
+</body>
+</html>
