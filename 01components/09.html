@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定2</title>
+</head>
+<body>
+<div id="app">
+    money:{{money}} <br>
+    <!--2,父将事件传给子,  childthings.$on('childthings',things)-->
+    <awsome :childmoney="money" @childthings="things"></awsome>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+    //1. 单向数据更新不应该发生
+    //2. 子想改变数据,应该通知父先改变, 父改变后,子自动刷新
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money: 700,
+        },
+        methods: {
+            things(val) {                                           // 1.父亲定义更改自己money事件
+                alert(val);
+                this.money = val;
+            }
+        },
+        components: {
+            awsome: {
+                data: function () {
+                    return {count: 0}
+                },
+                props: ['childmoney'],
+                methods: {
+                    getMoney() {
+                        this.$emit('childthings', 1400);            // 3, 子在这里(相当于)触发父方法在父上执行(函数名+参数)
+                    }
+                },
+                template: "<button @click='getMoney'>childmoney: {{childmoney}}</button>"
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props默认是单向绑定</title>
+</head>
+<body>
+<div id="app">
+    <h1>父组件数据</h1>
+    name: {{ name }}
+    <input type="text" v-model="name"/> <br>
+    age: {{ age }}
+    <input type="text" v-model="age"/>
+
+    <my-component :my-name="name" :my-age="age"></my-component>
+
+</div>
+
+<template id="myComponent">
+    <div>
+        <h1>子组件数据</h1>
+        myName: {{ myName }}
+        <input type="text" v-model="myName"/> <br>
+        myAge: {{ myAge }}
+        <input type="text" v-model="myAge"/>
+    </div>
+</template>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //- 子组件的数据更改,不影响父组件
+    //- 父组件的数据更改,会影响子组件
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'maomao',
+            age: 22
+        },
+        components: {
+            'my-component': {
+                template: '#myComponent',
+                props: ['myName', 'myAge']
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>局部组件</title>
+</head>
+<body>
+<div id="app">
+    <awsome></awsome>
+    <awsome2></awsome2>
+    <awsome3></awsome3>
+    <awsome4></awsome4>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let awsome4 = {
+        data: function () {
+            return {count: 0};
+        },
+        template: "<button @click='count++'>count++: {{count}}</button>"
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "maotai",
+        },
+        components: {
+            awsome: {
+                template: "<h1>局部组件</h1>"
+            },
+            awsome2: {
+                data: function () { // 1.必须是函数 2,返回值必须是对象类型
+                    return {msg: "maomao"}
+                },
+                template: "<h1>局部组件-{{msg}}</h1>"
+            },
+            awsome3: {
+                data: function () {
+                    return {count: 0}
+                },
+                template: "<button @click='count++'>count++: {{count}}</button>"
+            },
+            // 局部组件使用3步骤: 1,创建  2.注册 3,使用
+            awsome4: awsome4,
+        }
+    });
+</script>
+</body>
+</html>

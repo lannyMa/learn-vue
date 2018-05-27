@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //1. 如果有template属性会用模板替换掉外部html，只要有此属性app中的内容就没有任何意义了
+    //2. 只能有一个根元素，不能是文本节点
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: 'hi' //不会被显示
+        },
+        template: "<div>内置组件模板</div>",
+    })
+</script>
+</body>
+</html>

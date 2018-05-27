@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    money:{{money}} <br>
+    <h1>sync双向绑定1-1:</h1>
+    <awsome :childmoney="money" @update:childmoeny="val=>this.money=val"></awsome>
+    <h1>sync双向绑定1-2:</h1>
+    <awsome :childmoney="money" @update:childmoeny="things"></awsome>
+    <h1>sync双向绑定1-3: 简化写法</h1>
+    <awsome :childmoney.sync="money"></awsome>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money: 700,
+        },
+        methods: {
+            things(val) {
+                alert(val);
+                this.money = val;
+            }
+        },
+        components: {
+            awsome: {
+                data: function () {
+                    return {count: 0}
+                },
+                props: ['childmoney'],
+                methods: {
+                    getMoney() {
+                        this.$emit('update:childmoney', 1400);  // 这里需要改成和上面父给子注册方法时相同的名字
+                    }
+                },
+                template: "<button @click='getMoney'>childmoney: {{childmoney}}</button>"
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定1</title>
+</head>
+<body>
+<div id="app">
+money:{{money}} <br>
+<awsome :childmoney="money"></awsome>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money: 700,
+        },
+        components: {
+            awsome: {
+                data: function () {
+                    return {count: 0}
+                },
+                props: ['childmoney'],
+                template: "<button @click='childmoney++'>childmoney: {{childmoney}}</button>"
+            }
+        }
+    })
+</script>
+</body>
+</html>

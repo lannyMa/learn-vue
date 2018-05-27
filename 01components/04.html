@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件获取父组件的数据: props</title>
+</head>
+<body>
+<h1>props: 父组件数据传给子组件</h1>
+<div id="app">
+    <awsome :my-name="name" :my-age="age"></awsome>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //1. 父定义数据 2,子组件v-bind绑定父组件的数据 3,子组件props接收,即子可以在template里使用父的数据
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'fu-maomao',
+            age: 22
+        },
+        components: {
+            'awsome': {
+                template: '<div>name: {{myName}} age:{{myAge}}</div>',
+                props: ['myName', 'myAge']
+            }
+        }
+    })
+</script>
+</body>
+</html>

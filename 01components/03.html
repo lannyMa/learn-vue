@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件共享数据</title>
+</head>
+<body>
+<div id="app">
+    <h1>多组件: 共享数据</h1>
+    <awsome></awsome>
+    <awsome></awsome>
+    <hr>
+    <h1>多组件: 独立空间数据</h1>
+    <awsome2></awsome2>
+    <awsome2></awsome2>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 共享数据(数据定义在了componet外部)
+    let obj = {count: 0};
+    Vue.component('awsome', {
+            data: function () {
+                return obj;
+            },
+            template: "<button @click='count++'>awsome: {{count}}</button>"
+        }
+    );
+
+    //独立数据
+    Vue.component('awsome2', {
+            data: function () {
+                return {count: 0};
+            },
+            template: "<button @click='count++'>awsome2: {{count}}</button>"
+        }
+    );
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "maotai",
+        }
+    })
+</script>
+</body>
+</html>
