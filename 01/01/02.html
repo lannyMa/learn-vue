@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind样式</title>
+    <style>
+        .x {
+            background-color: darkgreen;
+        }
+
+        .y {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>v-text</h1>
+    {{m1}}
+    <p v-text="m1"></p>
+
+    <h1>v-once</h1>
+    <p v-once>{{m2}}</p>
+
+    <h1>v-html</h1>
+    <p v-text="msg_html"></p>
+    <p v-html="msg_html"></p>
+
+
+    <h1>v-model</h1>
+    <input type="text" v-model.lazy="m3">{{m3}} <br>
+    number: <input type="number" min="0" v-model.number="n1">
+
+    <h1>事件</h1>
+    <button @click="m4+=1">{{m4}}</button>
+
+    <button @click="show">click methods</button>
+    <button @click="show2('mao tai')">click methods args</button>
+
+    <a href="https://www.baidu.com/" target="_blank" @click="show3($event,'arg1')">baidu.com</a>
+    <a href="https://www.baidu.com/" target="_blank" @click.prevent="show2">baidu.com</a>
+
+
+    <h1>属性绑定: 链接/图片</h1>
+    <a :href="baiduUrl" target="_blank">baidu</a> <br>
+    <img :src="imgUrl" alt="">
+
+    <h1>绑定样式</h1>
+    <p :style="[style0, style1,{fontSize:'30px'}]">bangding yangshi</p>
+
+    <p class="x" :class="[class2,]">1212312</p>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  let vm = new Vue({
+    // v-bind:  冒号
+    // v-on:    @
+
+    el: "#app",
+    data: {
+      m1: "maotai",
+      msg_html: "<h4>test v-html</h4>",
+      baiduUrl: 'https://www.baidu.com/',
+      imgUrl: 'https://images2017.cnblogs.com/blog/1312420/201801/1312420-20180111144958785-846356823.png',
+      m2: "test v-once",
+      m3: "test v-model",
+      m4: 0,
+      n1: '1',
+
+      //bind-style
+      style0: {background: 'lavender'},
+      style1: {color: 'red'},
+      class2: 'y',
+    },
+    methods: {
+      show() {
+        alert("click me!!")
+      },
+      show2(arg1) {
+        alert(arg1);
+      },
+      show3(event, arg1) {
+        alert(event);
+        alert(arg1);
+        event.preventDefault();
+      },
+
+    }
+  })
+</script>
+</body>
+</html>

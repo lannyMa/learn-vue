@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切换组件</title>
+</head>
+<body>
+<div id="app">
+    <h1>显示组件</h1>
+    <componet is="home"></componet>
+    <componet is="list"></componet>
+
+    <h1>切换组件</h1>
+    home: <input type="radio" value="home" v-model="flag">
+    home: <input type="radio" value="list" v-model="flag">
+    <componet :is="flag"></componet>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      flag: true,
+    },
+    components: {
+      home: {
+        template: "<div>home</div>"
+      },
+      list: {
+        template: "<div>list</div>"
+      }
+    }
+  })
+</script>
+</body>
+</html>

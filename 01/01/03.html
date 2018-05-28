@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed</title>
+</head>
+<body>
+<div id="app">
+    <h1>v-text</h1>
+    {{msg.split('').reverse().join('')}}
+
+    <h1>methods</h1>
+    {{show('maomao')}}
+
+    <h1>computed</h1>
+    {{show2}}
+
+    <h1>计算价格</h1>
+    <input type="text" v-model="n1">
+    <input type="text" v-model="n2"> <br>
+    {{price3}}
+
+    <h1>checkall</h1>
+    all: <input type="checkbox" v-model="checkAll"> <br>
+    <input type="checkbox" v-for="product in products" v-model="product.isSelected">
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      msg: "maotai",
+      n1: 10,
+      n2: 20,
+      products: [
+        {productName: 'python', isSelected: true},
+        {productName: 'go', isSelected: true},
+      ]
+    },
+    methods: {
+      show(arg) {
+        return arg.split('').reverse().join('');
+      }
+    },
+    computed: {
+      show2() {
+        return this.msg.split('').reverse().join('');
+      },
+      price3() {
+        return parseInt(this.n1) + parseInt(this.n2);
+      },
+      checkAll: {
+        get() {
+          return this.products.every(item => item.isSelected);
+        },
+        set(val) {
+          this.products.forEach(item => item.isSelected = val);
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

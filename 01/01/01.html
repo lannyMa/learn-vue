@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据绑定</title>
+</head>
+<body>
+<div id="app">
+    <h1>普通绑定</h1>
+    {{msg}}
+    <h1>双向绑定</h1>
+    <input type="text" v-model="msg2"> {{msg2}}
+
+    <h1>选择性别/单选题</h1>
+    <label for="male">male: </label>
+    <input type="radio" value="male" v-model="gender">
+    <label for="female">female: </label>
+    <input type="radio" value="female" v-model="gender">
+
+    <h1>多选题:checkbox</h1>
+    <label for="a">A</label>
+    <input type="checkbox" value="a" v-model="m3">
+    <label for="b">B</label>
+    <input type="checkbox" value="b" v-model="m3">
+    <label for="c">C</label>
+    <input type="checkbox" value="c" v-model="m3">
+    <label for="d">D</label>
+    <input type="checkbox" value="d" v-model="m3">
+
+    <h1>下拉select: 多选</h1>
+    <select name="" id="" v-model="m4" multiple>
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+    </select>
+
+    <h1>下拉select: 单选</h1>
+    <select name="" id="" v-model="m5">
+        <option value="" disabled>请选择</option>
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+    </select>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+  /*vue思路:
+  模板:
+      v-text(v-once)
+      v-html
+
+      v-model:
+          .lazy .number .trim
+      v-bind: 冒号缩写
+          属性
+          style
+          class
+      v-on: @缩写
+          @click.prevent
+          @click.keyup
+
+          事件传递1, 2,
+
+  属性绑定:
+      style
+      class
+      属性
+
+  -
+  computed:
+  watch   */
+  let vm = new Vue({
+    el: "#app",
+    data: {
+      msg: "maotai",
+      msg2: "maotai2",
+      gender: "male",
+      m3: [],
+      m4: [],
+      m5: "",
+    }
+  })
+</script>
+</body>
+</html>
